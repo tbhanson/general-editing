@@ -33,10 +33,10 @@
  (levenshtein "kitten" "sitting")
  3)
 
-; (this one takes unbearably long with the naive implementation)
-;(check-equal?
-; (levenshtein "rosettacode" "raisethysword")
-; 8)
+; (this one took unbearably long with the naive implementation)
+(check-equal?
+ (levenshtein "rosettacode" "raisethysword")
+ 8)
 
 ; a couple others to help think about caching
 
