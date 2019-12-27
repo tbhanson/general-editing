@@ -47,3 +47,13 @@
 (check-equal?
  (levenshtein "singing" "sitting")
  2)
+
+
+(check-equal?
+ (list-levenshtein (string->list "kitten") (string->list "sitting"))
+ 3)
+
+; (this one took unbearably long with the naive implementation)
+(check-equal?
+ (list-levenshtein (string->list "rosettacode") (string->list "raisethysword"))
+ 8)
