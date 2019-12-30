@@ -33,6 +33,9 @@
 (define (levenshtein str1 str2)
   (list-levenshtein (string->list str1) (string->list str2)))
 
+(define (bytes-levenshtein bytes1 bytes2)
+  (list-levenshtein (bytes->list bytes1) (bytes->list bytes2)))
 
 (provide list-levenshtein
+         bytes-levenshtein
          levenshtein)

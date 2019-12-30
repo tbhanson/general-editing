@@ -27,4 +27,8 @@
  ((difference-editor "sitting" "kitten") "sitting")
  "kitten")
 
+; because of the way edits are destructive and don't check their preconditions, this works too:
+(check-equal?
+ ((difference-editor "ab" "xy") "cd")
+ "xy")
 
