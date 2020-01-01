@@ -23,6 +23,34 @@
                ;(printf "result: ~a~n" result)
                (append (list (= len1 len2) minlen) result))]))))
 
+; for the stretch of the two lists
+; return a quadruple:
+; - lengths equal?
+; - minimum length (common length, maximum compared index)
+; (up to the common length)
+; - number of times corresponding bytes are equal
+; - number of times unequal
+
+(define (compare-list-commonality list1 list2)
+  (let ([len1 (bytes-length list1)]
+        [len2 (bytes-length list2)])
+    (let ([maxlen (max len1 len2)]
+          [minlen (min len1 len2)])
+      (cond [(= minlen 0) (list #t 0 0 0)]
+            [else
+             (let-values ([(equal-count unequal-count)
+                           (for/fold ([count-equal 0]
+                                      [count-unequal 0])
+                                     
+                                     ([b1 list1]
+                                      [b2 list2])
+                             (if (= b1 b2)
+                                 (values (+ count-equal 1) count-unequal)
+                                 (values count-equal (+ count-unequal 1))))])
+                             
+               (append (list (= len1 len2) minlen) (list equal-count unequal-count)))]))))
+
+
 (define (show-range-two-lists list1 list2 lo-index hi-index)
   (for ([b1 list1]
         [b2 list2]
@@ -31,4 +59,5 @@
     (printf "~a: ~a (~a) ~a (~a)~n" idx b1 (integer->char b1) b2 (integer->char b2))))
 
 (provide compare-lists
+         compare-list-commonality
          show-range-two-lists)

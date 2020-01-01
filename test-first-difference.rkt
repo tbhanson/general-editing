@@ -43,3 +43,40 @@
   (bytes 0 2 3))
  (list #t 3 #f 1))
 
+; -------
+(check-equal?
+ (compare-list-commonality
+  (bytes )
+  (bytes ))
+ (list #t 0 0 0))
+
+(check-equal?
+ (compare-list-commonality
+  (bytes 0)
+  (bytes 0))
+ (list #t 1 1 0))
+
+
+(check-equal?
+ (compare-list-commonality
+  (bytes 1)
+  (bytes 0))
+ (list #t 1 0 1))
+
+(check-equal?
+ (compare-list-commonality
+  (bytes 0 1)
+  (bytes 0))
+ (list #f 1 1 0))
+
+(check-equal?
+ (compare-list-commonality
+  (bytes 0 1)
+  (bytes 0 2))
+ (list #t 2 1 1))
+
+(check-equal?
+ (compare-list-commonality
+  (bytes 0 1 2)
+  (bytes 0 2 3))
+ (list #t 3 1 2))
